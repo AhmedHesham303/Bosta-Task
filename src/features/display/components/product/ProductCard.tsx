@@ -1,4 +1,4 @@
-import { ShoppingCart, Eye, Star } from "lucide-react";
+import { ShoppingCart, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -20,7 +20,7 @@ export default function ProductCard({
   onViewDetails,
   onAddToCart,
 }: ProductCardProps) {
-  const { id, title, price, category, image, rating } = product;
+  const { id, title, price, category, image } = product;
 
   return (
     <Card className="group flex flex-col h-full hover:shadow-md transition-shadow duration-200">
@@ -43,13 +43,6 @@ export default function ProductCard({
         <p className="text-sm font-medium text-foreground line-clamp-2 min-h-[2.5rem]">
           {title}
         </p>
-
-        <div className="flex items-center gap-1">
-          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-          <span className="text-xs text-muted-foreground">
-            {rating.rate} ({rating.count})
-          </span>
-        </div>
 
         <p className="text-lg font-bold mt-auto">${price.toFixed(2)}</p>
       </CardContent>
