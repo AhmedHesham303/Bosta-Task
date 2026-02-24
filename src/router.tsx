@@ -11,21 +11,21 @@ import AuthLayout from "./components/layout/AuthLayout";
 
 export const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Navigate to="/products-listing" replace />,
+  },
+  {
+    index: true,
+    path: "products-listing",
+    element: <ProductListing />,
+  },
+  {
+    path: "products/:id",
+    element: <ProductDetails />,
+  },
+  {
     element: <UnAuthLayout />,
     children: [
-      {
-        path: "/",
-        element: <Navigate to="/products-listing" replace />,
-      },
-      {
-        index: true,
-        path: "products-listing",
-        element: <ProductListing />,
-      },
-      {
-        path: "products/:id",
-        element: <ProductDetails />,
-      },
       {
         path: "login",
         element: <Login />,
