@@ -1,13 +1,13 @@
-import { Navigate, Outlet, createBrowserRouter } from "react-router";
+import { Navigate, createBrowserRouter } from "react-router";
 import NotFound from "./pages/NotFound";
 import CreateProduct from "./pages/product/CreateProduct";
 import Cart from "./pages/cart/cart";
-import WithAuthLayout from "./components/HOCs/WithAuthLayout";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import ProductDetails from "./pages/product/productDetails";
 import ProductListing from "./pages/product/ProductListing";
 import UnAuthLayout from "./components/layout/UnAuthLayout";
+import AuthLayout from "./components/layout/AuthLayout";
 
 export const router = createBrowserRouter([
   {
@@ -38,11 +38,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    element: (
-      <WithAuthLayout>
-        <Outlet />
-      </WithAuthLayout>
-    ),
+    element: <AuthLayout />,
     children: [
       {
         path: "products/create",

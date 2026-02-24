@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router";
 
 export default function AuthLayout() {
   const token = getToken();
-  if (!token) return <Navigate to="/signin" />;
+  if (!token) return <Navigate to="/login" />;
 
   return <Outlet />;
 }
