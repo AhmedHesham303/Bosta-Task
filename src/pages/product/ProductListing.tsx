@@ -6,11 +6,13 @@ import { useGetProducts } from "@/features/display/hooks/services/useGetProduct"
 export default function ProductListing() {
   const navigate = useNavigate();
 
-  const { data: products, isLoading, isError } = useGetProducts();
+  const { data, isLoading, isError } = useGetProducts();
   return (
     <WithLoadingAndError isError={isError} isLoading={isLoading}>
       <ProductsContainer
-        products={products}
+        products={data?.products}
+        total={data?.total || 1}
+        pages={data?.pages}
         onViewDetails={(id) => navigate(`/products/${id}`)}
       />
     </WithLoadingAndError>

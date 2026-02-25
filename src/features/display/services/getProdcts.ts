@@ -8,10 +8,13 @@ interface ProductFilters {
   page?: number;
   limit?: number;
 }
-
 export const getProducts = async (
   filters?: ProductFilters,
-): Promise<Product[]> => {
+): Promise<{
+  products: Product[];
+  total: number;
+  pages: number;
+}> => {
   const { sort, category, page = 1, limit = PRODUCTS_LIMIT } = filters ?? {};
 
   const res = await fetch("https://fakestoreapi.com/products");
@@ -19,7 +22,7 @@ export const getProducts = async (
   if (!res.ok) throw new Error("Failed to fetch products");
 
   let products: Product[] = await res.json();
-  if (!products) return [];
+
   if (category && category !== "all") {
     products = products.filter((p) => p.category === category);
   }
@@ -30,7 +33,10 @@ export const getProducts = async (
     products = [...products].sort((a, b) => b.price - a.price);
   }
 
+  const total = products.length;
+  const pages = Math.ceil(total / limit);
+
   products = paginateProducts(products, page, limit);
 
-  return products;
+  return { products, total, pages };
 };
