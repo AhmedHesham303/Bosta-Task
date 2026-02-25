@@ -7,8 +7,13 @@ export default function ProductListing() {
   const navigate = useNavigate();
 
   const { data, isLoading, isError } = useGetProducts();
+  const hasNoData = data?.products.length === 0;
   return (
-    <WithLoadingAndError isError={isError} isLoading={isLoading}>
+    <WithLoadingAndError
+      isError={isError}
+      isLoading={isLoading}
+      hasNoData={hasNoData}
+    >
       <ProductsContainer
         products={data?.products}
         total={data?.total || 1}
