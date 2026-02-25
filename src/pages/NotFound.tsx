@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router";
-import { PiArrowLeft, PiFileX, PiHouse } from "react-icons/pi";
+import { PiFileX, PiHouse } from "react-icons/pi";
 import { Button } from "@/components/ui/button";
-import { useGoBack } from "@/hooks/useGoBack";
 import { cn } from "@/lib/utils";
 
 export default function NotFound() {
-  const goBack = useGoBack();
   const navigate = useNavigate();
 
   const handleGoHome = () => {
@@ -32,18 +30,7 @@ export default function NotFound() {
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={goBack}
-            className={cn(
-              "w-full bg-white uppercase sm:w-auto sm:min-w-[140px]",
-            )}
-          >
-            <PiArrowLeft className="size-4" />
-            <span className="font-mono text-xs">Go Back</span>
-          </Button>
+        <div className="flex w-full justify-center items-center">
           <Button
             variant="default"
             size="lg"
