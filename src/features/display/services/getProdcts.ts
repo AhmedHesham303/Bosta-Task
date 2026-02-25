@@ -1,10 +1,36 @@
+import { PRODUCTS_LIMIT } from "../constants/productsLimit";
+import { paginateProducts } from "../lib/paginateProducts";
 import type { Product } from "../types/Product";
 
-export const getProducts = async (limit: number = 10): Promise<Product[]> => {
-  const res = await fetch(`https://fakestoreapi.com/products?limit=${limit}`);
+interface ProductFilters {
+  sort?: string | null;
+  category?: string | null;
+  page?: number;
+  limit?: number;
+}
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
+export const getProducts = async (
+  filters?: ProductFilters,
+): Promise<Product[]> => {
+  const { sort, category, page = 1, limit = PRODUCTS_LIMIT } = filters ?? {};
+
+  const res = await fetch("https://fakestoreapi.com/products");
+
+  if (!res.ok) throw new Error("Failed to fetch products");
+
+  let products: Product[] = await res.json();
+  if (!products) return [];
+  if (category && category !== "all") {
+    products = products.filter((p) => p.category === category);
   }
-  return res.json() || [];
+
+  if (sort === "asc") {
+    products = [...products].sort((a, b) => a.price - b.price);
+  } else if (sort === "desc") {
+    products = [...products].sort((a, b) => b.price - a.price);
+  }
+
+  products = paginateProducts(products, page, limit);
+
+  return products;
 };
