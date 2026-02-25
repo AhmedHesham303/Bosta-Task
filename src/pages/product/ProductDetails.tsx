@@ -1,14 +1,13 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetProduct } from "@/features/display/hooks/services/useGetProduc";
-import { useGoBack } from "@/hooks/useGoBack";
 
 export default function ProductDetails() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const { data: product } = useGetProduct(id);
 
   if (!product) {
@@ -25,7 +24,11 @@ export default function ProductDetails() {
 
   return (
     <div className="container mx-auto py-10 px-4">
-      <Button variant="ghost" className="mb-6 gap-2" onClick={() => useGoBack}>
+      <Button
+        variant="ghost"
+        className="mb-6 gap-2"
+        onClick={() => navigate("/products-listing")}
+      >
         <ArrowLeft className="h-4 w-4" />
         Back to Products
       </Button>
