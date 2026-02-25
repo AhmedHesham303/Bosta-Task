@@ -13,15 +13,14 @@ interface ProductsContainerProps {
 }
 export default function ProductsContainer({
   products,
-  total = 1,
-  pages,
+  total,
+  pages = 1,
   onViewDetails,
   onAddToCart,
 }: ProductsContainerProps) {
   return (
     <WithPagination
       enabled={total > PRODUCTS_LIMIT}
-      total={total}
       pages={pages}
       wrapperClassName="mb-4"
     >
