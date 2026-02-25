@@ -8,21 +8,28 @@ import UnAuthLayout from "./components/layout/UnAuthLayout";
 import AuthLayout from "./components/layout/AuthLayout";
 import ProductDetails from "./pages/product/ProductDetails";
 import Cart from "./pages/cart/Cart";
+import MainLayout from "./components/layout/MainLayout";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Navigate to="/products-listing" replace />,
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Navigate to="/products-listing" replace />,
+      },
+      {
+        index: true,
+        path: "products-listing",
+        element: <ProductListing />,
+      },
+      {
+        path: "products/:id",
+        element: <ProductDetails />,
+      },
+    ],
   },
-  {
-    index: true,
-    path: "products-listing",
-    element: <ProductListing />,
-  },
-  {
-    path: "products/:id",
-    element: <ProductDetails />,
-  },
+
   {
     element: <UnAuthLayout />,
     children: [

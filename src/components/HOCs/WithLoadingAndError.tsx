@@ -23,7 +23,7 @@ const WithLoadingAndError = ({
   errorMessageProps,
   noDataMessageProps,
   loadingComponent = (
-    <div className="flex size-full flex-1 items-center justify-center  h-full">
+    <div className="flex size-full flex-1 items-center justify-center  ">
       <Spinner />
     </div>
   ),
