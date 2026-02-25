@@ -18,8 +18,8 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Navigate to="/products-listing" replace />,
       },
+
       {
-        index: true,
         path: "products-listing",
         element: <ProductListing />,
       },
@@ -27,39 +27,39 @@ export const router = createBrowserRouter([
         path: "products/:id",
         element: <ProductDetails />,
       },
-    ],
-  },
 
-  {
-    element: <UnAuthLayout />,
-    children: [
       {
-        path: "login",
-        element: <Login />,
+        element: <UnAuthLayout />,
+        children: [
+          {
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "signup",
+            element: <Signup />,
+          },
+        ],
       },
+
       {
-        path: "signup",
-        element: <Signup />,
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "products/create",
+            element: <CreateProduct />,
+          },
+          {
+            path: "cart",
+            element: <Cart />,
+          },
+        ],
+      },
+
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
-  },
-
-  {
-    element: <AuthLayout />,
-    children: [
-      {
-        path: "products/create",
-        element: <CreateProduct />,
-      },
-      {
-        path: "cart",
-        element: <Cart />,
-      },
-    ],
-  },
-
-  {
-    path: "*",
-    element: <NotFound />,
   },
 ]);
