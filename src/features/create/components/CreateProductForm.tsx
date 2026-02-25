@@ -56,95 +56,93 @@ export default function CreateProductForm() {
           );
         }}
       >
-        {({ isSubmitting }) => (
-          <Form className="flex flex-col gap-5">
-            <div>
-              <label className="block mb-1 font-medium">Title</label>
-              <Field
-                name="title"
-                type="text"
-                className="w-full border rounded p-2"
-              />
-              <ErrorMessage
-                name="title"
-                component="p"
-                className="text-red-500 text-sm"
-              />
-            </div>
+        <Form className="flex flex-col gap-5">
+          <div>
+            <label className="block mb-1 font-medium">Title</label>
+            <Field
+              name="title"
+              type="text"
+              className="w-full border rounded p-2"
+            />
+            <ErrorMessage
+              name="title"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
 
-            <div>
-              <label className="block mb-1 font-medium">Description</label>
-              <Field
-                as="textarea"
-                name="description"
-                rows={4}
-                className="w-full border rounded p-2"
-              />
-              <ErrorMessage
-                name="description"
-                component="p"
-                className="text-red-500 text-sm"
-              />
-            </div>
+          <div>
+            <label className="block mb-1 font-medium">Description</label>
+            <Field
+              as="textarea"
+              name="description"
+              rows={4}
+              className="w-full border rounded p-2"
+            />
+            <ErrorMessage
+              name="description"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
 
-            <div>
-              <label className="block mb-1 font-medium">Price</label>
-              <Field
-                name="price"
-                type="number"
-                className="w-full border rounded p-2"
-              />
-              <ErrorMessage
-                name="price"
-                component="p"
-                className="text-red-500 text-sm"
-              />
-            </div>
+          <div>
+            <label className="block mb-1 font-medium">Price</label>
+            <Field
+              name="price"
+              type="number"
+              className="w-full border rounded p-2"
+            />
+            <ErrorMessage
+              name="price"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
 
-            <div>
-              <label className="block mb-1 font-medium">Category</label>
-              <Field
-                as="select"
-                name="category"
-                className="w-full border rounded p-2"
-              >
-                <option value="">Select Category</option>
-                {categories.map((cat: string) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage
-                name="category"
-                component="p"
-                className="text-red-500 text-sm"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-1 font-medium">Image URL</label>
-              <Field
-                name="image"
-                type="text"
-                className="w-full border rounded p-2"
-              />
-              <ErrorMessage
-                name="image"
-                component="p"
-                className="text-red-500 text-sm"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting || isPending}
-              className="bg-black text-white py-2 rounded disabled:opacity-50"
+          <div>
+            <label className="block mb-1 font-medium">Category</label>
+            <Field
+              as="select"
+              name="category"
+              className="w-full border rounded p-2"
             >
-              {isPending ? "Creating..." : "Create Product"}
-            </button>
-          </Form>
-        )}
+              <option value="">Select Category</option>
+              {categories.map((cat: string) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage
+              name="category"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium">Image URL</label>
+            <Field
+              name="image"
+              type="text"
+              className="w-full border rounded p-2"
+            />
+            <ErrorMessage
+              name="image"
+              component="p"
+              className="text-red-500 text-sm"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isPending}
+            className="bg-black text-white py-2 rounded disabled:opacity-50"
+          >
+            {isPending ? "Creating..." : "Create Product"}
+          </button>
+        </Form>
       </Formik>
     </div>
   );
