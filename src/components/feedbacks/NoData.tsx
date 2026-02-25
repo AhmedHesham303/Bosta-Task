@@ -24,7 +24,7 @@ function NoData({
   return (
     <div
       className={cn(
-        "flex w-full flex-col items-center justify-center p-8 text-center",
+        "flex w-full flex-col items-center justify-center p-8 text-center my-auto h-full",
         className,
       )}
     >
