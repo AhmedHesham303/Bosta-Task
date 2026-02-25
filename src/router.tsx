@@ -1,6 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router";
 import NotFound from "./pages/NotFound";
-import CreateProduct from "./pages/product/CreateProduct";
+import CreateProduct from "./pages/create/CreateProduct";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import ProductListing from "./pages/product/ProductListing";
