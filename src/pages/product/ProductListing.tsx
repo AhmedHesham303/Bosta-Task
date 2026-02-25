@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import WithLoadingAndError from "@/components/HOCs/WithLoadingAndError";
 import ProductsContainer from "@/features/display/components/product/ProductContainer";
-import { useGetProducts } from "@/features/display/hooks/services/useGetProduct";
+import { useGetProducts } from "@/features/display/hooks/services/useGetProducts";
 
 export default function ProductListing() {
   const navigate = useNavigate();
