@@ -9,7 +9,7 @@ import AuthLayout from "./components/layout/AuthLayout";
 import ProductDetails from "./pages/product/ProductDetails";
 import Cart from "./pages/cart/Cart";
 import MainLayout from "./components/layout/MainLayout";
-
+import CenteredLayout from "./components/layout/CenteredLayout";
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -18,47 +18,39 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Navigate to="/products-listing" replace />,
       },
-
       {
         path: "products-listing",
         element: <ProductListing />,
       },
-      {
-        path: "products/:id",
-        element: <ProductDetails />,
-      },
 
+      // Everything below gets centered
       {
-        element: <UnAuthLayout />,
+        element: <CenteredLayout />,
         children: [
           {
-            path: "login",
-            element: <Login />,
+            path: "products/:id",
+            element: <ProductDetails />,
+          },
+
+          {
+            element: <UnAuthLayout />,
+            children: [
+              { path: "login", element: <Login /> },
+              { path: "signup", element: <Signup /> },
+            ],
           },
           {
-            path: "signup",
-            element: <Signup />,
+            element: <AuthLayout />,
+            children: [
+              { path: "products/create", element: <CreateProduct /> },
+              { path: "cart", element: <Cart /> },
+            ],
+          },
+          {
+            path: "*",
+            element: <NotFound />,
           },
         ],
-      },
-
-      {
-        element: <AuthLayout />,
-        children: [
-          {
-            path: "products/create",
-            element: <CreateProduct />,
-          },
-          {
-            path: "cart",
-            element: <Cart />,
-          },
-        ],
-      },
-
-      {
-        path: "*",
-        element: <NotFound />,
       },
     ],
   },

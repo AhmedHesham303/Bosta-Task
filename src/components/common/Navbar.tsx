@@ -10,7 +10,7 @@ const navItems = [
 
 export default function Navbar() {
   return (
-    <nav className="bg-white shadow px-6 py-3 w-full flex justify-center sticky top-0 index-100">
+    <nav className="bg-white shadow px-6 py-3 w-full flex justify-center fixed top-0 z-100">
       <ul className="flex gap-6 ">
         {navItems.map((item) => (
           <li key={item.path}>

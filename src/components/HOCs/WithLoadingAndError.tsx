@@ -12,7 +12,6 @@ interface WithLoadingAndErrorProps {
   hasNoData?: boolean;
   errorMessageProps?: ErrorMessageProps;
   noDataMessageProps?: NoDataProps;
-  loadingComponent?: ReactNode;
 }
 
 const WithLoadingAndError = ({
@@ -22,15 +21,18 @@ const WithLoadingAndError = ({
   hasNoData,
   errorMessageProps,
   noDataMessageProps,
-  loadingComponent = (
-    <div className="flex size-full flex-1 items-center justify-center  ">
-      <Spinner />
-    </div>
-  ),
 }: WithLoadingAndErrorProps) => {
-  if (isLoading) return loadingComponent;
-  else if (isError) return <ErrorMessage {...errorMessageProps} />;
-  else if (hasNoData) return <NoData {...noDataMessageProps} />;
+  const feedbackWrapper = (node: ReactNode) => (
+    <div className="flex flex-1 items-center justify-center min-h-[calc(100vh-3rem)]">
+      {node}
+    </div>
+  );
+
+  if (isLoading) return feedbackWrapper(<Spinner />);
+  else if (isError)
+    return feedbackWrapper(<ErrorMessage {...errorMessageProps} />);
+  else if (hasNoData)
+    return feedbackWrapper(<NoData {...noDataMessageProps} />);
   return children;
 };
 
