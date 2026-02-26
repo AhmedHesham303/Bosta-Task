@@ -1,15 +1,15 @@
 import WithPagination from "@/components/HOCs/WithPagination";
-import type { Product } from "../../types/Product";
 import ProductCard from "./ProductCard";
 import ProductsFilter from "./filters";
 import { PRODUCTS_LIMIT } from "../../constants/productsLimit";
+import type { Product } from "@/@types/Product";
 
 interface ProductsContainerProps {
   products: Product[] | undefined;
   total: number;
   pages?: number;
   onViewDetails: (id: number) => void;
-  onAddToCart?: (product: Product) => void;
+  onAddToCart: (product: Product) => void;
 }
 export default function ProductsContainer({
   products,

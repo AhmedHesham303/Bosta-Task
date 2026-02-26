@@ -1,6 +1,6 @@
+import type { Product } from "@/@types/Product";
 import { PRODUCTS_LIMIT } from "../constants/productsLimit";
 import { paginateProducts } from "../lib/paginateProducts";
-import type { Product } from "../types/Product";
 
 interface ProductFilters {
   sort?: string | null;
