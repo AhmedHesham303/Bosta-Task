@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import type { Product } from "../../../display/types/Product";
 import { createProduct } from "../../services/createProduct";
 import { toast } from "sonner";
+import type { Product } from "@/@types/Product";
 
 export const useCreateProduct = () => {
   return useMutation({

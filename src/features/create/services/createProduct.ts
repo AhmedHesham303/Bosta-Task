@@ -1,4 +1,4 @@
-import type { Product } from "../../display/types/Product";
+import type { Product } from "@/@types/Product";
 
 export const createProduct = async (data: Product) => {
   const res = await fetch("https://fakestoreapi.com/products", {
