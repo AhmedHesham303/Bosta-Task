@@ -9,14 +9,12 @@ interface ProductsContainerProps {
   total: number;
   pages?: number;
   onViewDetails: (id: number) => void;
-  onAddToCart: (product: Product) => void;
 }
 export default function ProductsContainer({
   products,
   total,
   pages = 1,
   onViewDetails,
-  onAddToCart,
 }: ProductsContainerProps) {
   return (
     <WithPagination
@@ -32,7 +30,6 @@ export default function ProductsContainer({
               key={product.id}
               product={product}
               onViewDetails={onViewDetails}
-              onAddToCart={onAddToCart}
             />
           ))}
         </div>

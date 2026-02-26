@@ -1,4 +1,4 @@
-import { ShoppingCart, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -8,19 +8,26 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import type { Product } from "@/@types/Product";
+import { useCartStore } from "@/store/cart";
+import AddToCartBtn from "./AddToCartBtn";
+import UpdateQantityBtn from "./UpdateQantityBtn";
 
 interface ProductCardProps {
   product: Product;
   onViewDetails: (id: number) => void;
-  onAddToCart: (product: Product) => void;
 }
 
 export default function ProductCard({
   product,
   onViewDetails,
-  onAddToCart,
 }: ProductCardProps) {
   const { id, title, price, category, image } = product;
+  const { getProductStatus, addToCart, incrementQuantity, decrementQuantity } =
+    useCartStore();
+  const { exists, quantity } = getProductStatus(id);
+  const handleAddClick = (product: Product) => {
+    addToCart(product);
+  };
 
   return (
     <Card className="group flex flex-col h-full hover:shadow-md transition-shadow duration-200">
@@ -54,14 +61,15 @@ export default function ProductCard({
           <Eye className="h-4 w-4" />
           View Details
         </Button>
-
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => onAddToCart(product)}
-        >
-          <ShoppingCart className="h-4 w-4" />
-        </Button>
+        {exists ? (
+          <UpdateQantityBtn
+            value={quantity}
+            incrementAction={() => incrementQuantity(product)}
+            decrementAction={() => decrementQuantity(product)}
+          />
+        ) : (
+          <AddToCartBtn action={() => handleAddClick(product)} />
+        )}
       </CardFooter>
     </Card>
   );
