@@ -1,3 +1,5 @@
+import { Button } from "../ui/button";
+
 type UpdateQuantityBtnProps = {
   incrementAction: () => void;
   decrementAction: () => void;
@@ -11,24 +13,26 @@ export default function UpdateQuantityBtn({
 }: UpdateQuantityBtnProps) {
   return (
     <div className="flex items-center gap-3 bg-[#f5f0eb] rounded-full px-2 py-1 w-fit">
-      <button
+      <Button
         onClick={decrementAction}
         disabled={value <= 1}
-        className="w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold text-[#1a1a1a] bg-white shadow-sm hover:bg-[#1a1a1a] hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+        variant="outline"
+        className="rounded-full"
       >
         −
-      </button>
+      </Button>
 
       <span className="w-6 text-center text-sm font-bold text-[#1a1a1a] select-none">
         {value}
       </span>
 
-      <button
+      <Button
         onClick={incrementAction}
-        className="w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold text-[#1a1a1a] bg-white shadow-sm hover:bg-[#1a1a1a] hover:text-white transition-all"
+        className="rounded-full"
+        variant="outline"
       >
         +
-      </button>
+      </Button>
     </div>
   );
 }
