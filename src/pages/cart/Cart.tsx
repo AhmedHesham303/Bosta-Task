@@ -24,15 +24,29 @@ export default function Cart() {
     );
   }
   return (
-    <div>
-      <h1>Yuor items</h1>
+    <div className="max-w-7xl mx-auto px-6 py-10 space-y-10">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          Your Items
+        </h1>
+
+        <div className="text-right">
+          <p className="text-sm text-gray-500">Total Price</p>
+          <p className="text-2xl font-bold text-black">
+            ${totalPrice.toFixed(2)}
+          </p>
+        </div>
+      </div>
+
+      <div className="h-px bg-gray-200" />
+
+      {/* Products */}
       <CartCardsContainer
         products={products}
         onIncrementQantity={incrementQuantity}
         onDecremenntQuantity={decrementQuantity}
         onRemove={removeFromCart}
       />
-      <h2>total price {totalPrice}</h2>
     </div>
   );
 }
