@@ -22,9 +22,13 @@ export default function ProductCard({
   onViewDetails,
 }: ProductCardProps) {
   const { id, title, price, category, image } = product;
-  const { getProductStatus, addToCart, incrementQuantity, decrementQuantity } =
-    useCartStore();
-  const { exists, quantity } = getProductStatus(id);
+  const { addToCart, incrementQuantity, decrementQuantity } = useCartStore();
+  const exists = useCartStore((state) =>
+    state.products.some((p) => p.id === id),
+  );
+  const quantity = useCartStore(
+    (state) => state.products.find((p) => p.id === id)?.quantity ?? 0,
+  );
   const handleAddClick = (product: Product) => {
     addToCart(product);
   };

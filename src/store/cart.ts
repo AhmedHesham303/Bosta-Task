@@ -9,12 +9,7 @@ import { create } from "zustand";
 interface CartStore {
   products: Product[];
   totalPrice: number;
-  getProductQuantity: (productId: number) => number;
-  isInCart: (productId: number) => boolean;
-  getProductStatus: (productId: number) => {
-    exists: boolean;
-    quantity: number;
-  };
+
   addToCart: (product: Product) => void;
   incrementQuantity: (product: Product) => void;
   decrementQuantity: (product: Product) => void;
@@ -22,7 +17,7 @@ interface CartStore {
   clearCart: () => void;
 }
 
-export const useCartStore = create<CartStore>((set, get) => ({
+export const useCartStore = create<CartStore>((set) => ({
   products: getCart().products,
   totalPrice: getCart().totalPrice,
 
@@ -69,19 +64,5 @@ export const useCartStore = create<CartStore>((set, get) => ({
   clearCart: () => {
     clearCartLS();
     set({ products: [], totalPrice: 0 });
-  },
-
-  getProductQuantity: (productId: number) => {
-    const item = get().products.find((p) => p.id === productId);
-    return item ? item.quantity : 0;
-  },
-
-  isInCart: (productId: number) => {
-    return get().products.some((p) => p.id === productId);
-  },
-
-  getProductStatus: (productId: number) => {
-    const item = get().products.find((p) => p.id === productId);
-    return { exists: !!item, quantity: item?.quantity || 0 };
   },
 }));
