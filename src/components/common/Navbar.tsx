@@ -8,6 +8,7 @@ export default function Navbar() {
   const handleLogout = () => {
     deleteToken();
     navigate("/");
+
     window.location.reload();
   };
 

@@ -7,10 +7,10 @@ export default function CreateProduct() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="w-full  ">
       <Button
         variant="ghost"
-        className="mb-6 gap-2"
+        className="mb-6 gap-2 "
         onClick={() => navigate("/products-listing")}
       >
         <ArrowLeft className="h-4 w-4" />

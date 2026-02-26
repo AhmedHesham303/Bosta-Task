@@ -67,21 +67,24 @@ export default function ProductCard({
         <p className="text-lg font-bold mt-auto">${price.toFixed(2)}</p>
       </CardContent>
 
-      <CardFooter className="flex gap-2 p-4 pt-0">
+      <CardFooter className="grid grid-cols-2 gap-2 p-4 pt-0 items-center">
+        {" "}
         <Button
           size="sm"
-          className="flex-1 gap-1"
+          className="flex-1 gap-1 text-xs"
           onClick={() => onViewDetails(id)}
         >
-          <Eye className="h-4 w-4" />
+          <Eye className="h-3 w-3" />
           View Details
         </Button>
         {exists ? (
-          <UpdateQantityBtn
-            value={quantity}
-            incrementAction={() => handleIncrement(product)}
-            decrementAction={() => handleDecrement(product)}
-          />
+          <div className="flex-1">
+            <UpdateQantityBtn
+              value={quantity}
+              incrementAction={() => handleIncrement(product)}
+              decrementAction={() => handleDecrement(product)}
+            />
+          </div>
         ) : (
           <AddToCartBtn action={() => handleAddClick(product)} />
         )}

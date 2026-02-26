@@ -26,7 +26,7 @@ export default function CreateProductForm() {
   const { data: categories = [] } = useGetCategories();
 
   return (
-    <div className="w-4xl max-sm:w-2xl  p-6 bg-white shadow rounded-lg">
+    <div className="max-w-4xl mx-auto  p-6 bg-white shadow rounded-lg">
       <h2 className="text-2xl font-bold mb-6">Create Product</h2>
 
       <Formik
