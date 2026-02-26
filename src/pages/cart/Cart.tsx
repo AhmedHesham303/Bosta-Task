@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import CartCardsContainer from "@/features/cart/components/CartCardsContainer";
+import CartTotalPrice from "@/features/cart/components/CartTotalPrice ";
 import { useCartStore } from "@/store/cart";
 import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router";
@@ -30,17 +31,11 @@ export default function Cart() {
           Your Items
         </h1>
 
-        <div className="text-right">
-          <p className="text-sm text-gray-500">Total Price</p>
-          <p className="text-2xl font-bold text-black">
-            ${totalPrice.toFixed(2)}
-          </p>
-        </div>
+        <CartTotalPrice totalPrice={totalPrice} />
       </div>
 
       <div className="h-px bg-gray-200" />
 
-      {/* Products */}
       <CartCardsContainer
         products={products}
         onIncrementQantity={incrementQuantity}
