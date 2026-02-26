@@ -19,9 +19,9 @@ export default function CartCardsContainer({
         <CartProductCard
           key={product.id}
           product={product}
-          onIncrementQantity={() => onIncrementQantity(product)}
-          onDecremenntQuantity={() => onDecremenntQuantity(product)}
-          onRemove={() => onRemove(product)}
+          onIncrementQantity={onIncrementQantity}
+          onDecremenntQuantity={onDecremenntQuantity}
+          onRemove={onRemove}
         />
       ))}
     </div>

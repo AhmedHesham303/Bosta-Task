@@ -9,7 +9,6 @@ export default function Cart() {
     removeFromCart,
     totalPrice,
   } = useCartStore();
-
   return (
     <div>
       <h1>Yuor items</h1>

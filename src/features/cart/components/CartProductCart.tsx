@@ -9,12 +9,13 @@ import type { Product } from "@/@types/Product";
 import UpdateQuantityBtn from "@/components/common/UpdateQantityBtn";
 import { useCartStore } from "@/store/cart";
 import RemoveCartBtn from "./RemoveCartBtn";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;
-  onIncrementQantity: () => void;
-  onDecremenntQuantity: () => void;
-  onRemove: () => void;
+  onIncrementQantity: (product: Product) => void;
+  onDecremenntQuantity: (product: Product) => void;
+  onRemove: (product: Product) => void;
 }
 
 export default function CartProductCard({
@@ -27,6 +28,19 @@ export default function CartProductCard({
   const quantity = useCartStore(
     (state) => state.products.find((p) => p.id === id)?.quantity ?? 0,
   );
+
+  const handleIncrement = (product: Product) => {
+    onIncrementQantity(product);
+    toast.success("One more item added");
+  };
+  const handleDecrement = (product: Product) => {
+    onDecremenntQuantity(product);
+    toast.success("One item added deleted");
+  };
+  const handleRemove = (product: Product) => {
+    onRemove(product);
+    toast.success("Removed from the cart");
+  };
 
   return (
     <Card className="group flex flex-col h-full hover:shadow-md transition-shadow duration-200">
@@ -54,10 +68,11 @@ export default function CartProductCard({
       <CardFooter className="flex gap-2 p-4 pt-0">
         <UpdateQuantityBtn
           value={quantity}
-          incrementAction={onIncrementQantity}
-          decrementAction={onDecremenntQuantity}
+          incrementAction={() => handleIncrement(product)}
+          decrementAction={() => handleDecrement(product)}
         />
-        <RemoveCartBtn action={onRemove} />
+
+        <RemoveCartBtn action={() => handleRemove(product)} />
       </CardFooter>
     </Card>
   );
