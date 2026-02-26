@@ -1,5 +1,3 @@
-import { ShoppingCart, Eye } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -8,6 +6,9 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import type { Product } from "@/@types/Product";
+import UpdateQuantityBtn from "@/components/common/UpdateQantityBtn";
+import { useCartStore } from "@/store/cart";
+import RemoveCartBtn from "./RemoveCartBtn";
 
 interface ProductCardProps {
   product: Product;
@@ -22,8 +23,10 @@ export default function CartProductCard({
   onDecremenntQuantity,
   onRemove,
 }: ProductCardProps) {
-  const { title, price, category, image } = product;
-
+  const { id, title, price, category, image } = product;
+  const quantity = useCartStore(
+    (state) => state.products.find((p) => p.id === id)?.quantity ?? 0,
+  );
   return (
     <Card className="group flex flex-col h-full hover:shadow-md transition-shadow duration-200">
       <CardHeader className="p-4 bg-gray-50 h-48 flex items-center justify-center">
@@ -48,17 +51,12 @@ export default function CartProductCard({
       </CardContent>
 
       <CardFooter className="flex gap-2 p-4 pt-0">
-        <Button size="sm" className="flex-1 gap-1" onClick={onIncrementQantity}>
-          <Eye className="h-4 w-4" />
-          View Details
-        </Button>
-
-        <Button size="sm" variant="outline" onClick={onDecremenntQuantity}>
-          <ShoppingCart className="h-4 w-4" />
-        </Button>
-        <Button size="sm" variant="outline" onClick={onRemove}>
-          <ShoppingCart className="h-4 w-4" />
-        </Button>
+        <UpdateQuantityBtn
+          value={quantity}
+          incrementAction={onIncrementQantity}
+          decrementAction={onDecremenntQuantity}
+        />
+        <RemoveCartBtn action={onRemove} />
       </CardFooter>
     </Card>
   );

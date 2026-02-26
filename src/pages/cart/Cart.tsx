@@ -1,4 +1,4 @@
-import CartCardsContainer from "@/features/cart/CartCardsContainer";
+import CartCardsContainer from "@/features/cart/components/CartCardsContainer";
 import { useCartStore } from "@/store/cart";
 
 export default function Cart() {

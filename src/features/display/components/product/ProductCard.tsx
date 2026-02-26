@@ -10,7 +10,7 @@ import {
 import type { Product } from "@/@types/Product";
 import { useCartStore } from "@/store/cart";
 import AddToCartBtn from "./AddToCartBtn";
-import UpdateQantityBtn from "./UpdateQantityBtn";
+import UpdateQantityBtn from "../../../../components/common/UpdateQantityBtn";
 
 interface ProductCardProps {
   product: Product;
