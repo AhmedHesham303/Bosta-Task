@@ -1,5 +1,5 @@
+import type { Product } from "@/@types/Product";
 import { PRODUCTS_LIMIT } from "../constants/productsLimit";
-import type { Product } from "../types/Product";
 
 export const paginateProducts = (
   products: Product[],

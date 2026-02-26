@@ -70,15 +70,15 @@ export default function ProductDetails() {
 
             <p className="text-lg font-bold ">${product?.price.toFixed(2)}</p>
 
-            {exists ? (
+            {product && exists ? (
               <UpdateQuantityBtn
                 value={quantity}
                 incrementAction={() => handleIncrement(product)}
                 decrementAction={() => handleDecrement(product)}
               />
-            ) : (
+            ) : product ? (
               <AddToCartBtn action={() => handleAddClick(product)} />
-            )}
+            ) : null}
           </CardContent>
         </Card>
       </div>

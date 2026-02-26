@@ -10,6 +10,6 @@ export interface Product {
   description: string;
   category: string;
   image: string;
-  rating: ProductRating;
-  quantity: number;
+  rating?: ProductRating;
+  quantity?: number;
 }

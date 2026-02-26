@@ -33,7 +33,7 @@ export default function CreateProductForm() {
         initialValues={{
           title: "",
           description: "",
-          price: "",
+          price: 0,
           category: "",
           image: "",
         }}
