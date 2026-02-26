@@ -23,7 +23,11 @@ export const router = createBrowserRouter([
         element: <ProductListing />,
       },
 
-      // Everything below gets centered
+      {
+        element: <AuthLayout />,
+        children: [{ path: "cart", element: <Cart /> }],
+      },
+
       {
         element: <CenteredLayout />,
         children: [
@@ -41,11 +45,9 @@ export const router = createBrowserRouter([
           },
           {
             element: <AuthLayout />,
-            children: [
-              { path: "products/create", element: <CreateProduct /> },
-              { path: "cart", element: <Cart /> },
-            ],
+            children: [{ path: "products/create", element: <CreateProduct /> }],
           },
+
           {
             path: "*",
             element: <NotFound />,
