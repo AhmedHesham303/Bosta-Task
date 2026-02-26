@@ -3,9 +3,9 @@ import CartProductCard from "./CartProductCart";
 
 type CartCardsContainerProps = {
   products: Product[];
-  onIncrementQantity: () => void;
-  onDecremenntQuantity: () => void;
-  onRemove?: () => void;
+  onIncrementQantity: (product: Product) => void;
+  onDecremenntQuantity: (product: Product) => void;
+  onRemove: (product: Product) => void;
 };
 export default function CartCardsContainer({
   products,
@@ -19,9 +19,9 @@ export default function CartCardsContainer({
         <CartProductCard
           key={product.id}
           product={product}
-          onIncrementQantity={onIncrementQantity}
-          onDecremenntQuantity={onDecremenntQuantity}
-          onRemove={onRemove}
+          onIncrementQantity={() => onIncrementQantity(product)}
+          onDecremenntQuantity={() => onDecremenntQuantity(product)}
+          onRemove={() => onRemove(product)}
         />
       ))}
     </div>

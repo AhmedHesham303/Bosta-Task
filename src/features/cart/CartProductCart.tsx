@@ -11,9 +11,9 @@ import type { Product } from "@/@types/Product";
 
 interface ProductCardProps {
   product: Product;
-  onIncrementQantity:()=>void;
-  onDecremenntQuantity()=>void;
-  onRemove?:()=>void;
+  onIncrementQantity: () => void;
+  onDecremenntQuantity: () => void;
+  onRemove: () => void;
 }
 
 export default function CartProductCard({
@@ -22,7 +22,7 @@ export default function CartProductCard({
   onDecremenntQuantity,
   onRemove,
 }: ProductCardProps) {
-  const { id, title, price, category, image } = product;
+  const { title, price, category, image } = product;
 
   return (
     <Card className="group flex flex-col h-full hover:shadow-md transition-shadow duration-200">
@@ -48,20 +48,15 @@ export default function CartProductCard({
       </CardContent>
 
       <CardFooter className="flex gap-2 p-4 pt-0">
-        <Button
-          size="sm"
-          className="flex-1 gap-1"
-          onClick={onIncrementQantity}
-        >
+        <Button size="sm" className="flex-1 gap-1" onClick={onIncrementQantity}>
           <Eye className="h-4 w-4" />
           View Details
         </Button>
 
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={onDecremenntQuantity}
-        >
+        <Button size="sm" variant="outline" onClick={onDecremenntQuantity}>
+          <ShoppingCart className="h-4 w-4" />
+        </Button>
+        <Button size="sm" variant="outline" onClick={onRemove}>
           <ShoppingCart className="h-4 w-4" />
         </Button>
       </CardFooter>
