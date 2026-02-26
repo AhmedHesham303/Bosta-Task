@@ -1,10 +1,8 @@
 import type { Product } from "@/@types/Product";
 import {
   getCart,
-  addToCart as addToCartLS,
-  removeFromCart as removeFromCartLS,
-  decrementQuantity as decrementQuantityLS,
-  incremrntQuantity as incrementQuantityLS,
+  saveCart,
+  clearCart as clearCartLS,
 } from "@/lib/storeStorage";
 import { create } from "zustand";
 
@@ -21,37 +19,58 @@ interface CartStore {
   incrementQuantity: (product: Product) => void;
   decrementQuantity: (product: Product) => void;
   removeFromCart: (product: Product) => void;
-  loadCart: () => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartStore>((set, get) => ({
   products: getCart().products,
   totalPrice: getCart().totalPrice,
 
-  loadCart: () => {
-    const { products, totalPrice } = getCart();
-    set({ products, totalPrice });
-  },
-
   addToCart: (product: Product) => {
-    addToCartLS(product);
-    get().loadCart();
+    set((state) => {
+      const products = [...state.products, { ...product, quantity: 1 }];
+      const totalPrice = state.totalPrice + product.price;
+      saveCart(products, totalPrice);
+      return { products, totalPrice };
+    });
   },
 
   incrementQuantity: (product: Product) => {
-    incrementQuantityLS(product);
-    get().loadCart();
+    set((state) => {
+      const products = state.products.map((p) =>
+        p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p,
+      );
+      const totalPrice = state.totalPrice + product.price;
+      saveCart(products, totalPrice);
+      return { products, totalPrice };
+    });
   },
 
   decrementQuantity: (product: Product) => {
-    decrementQuantityLS(product);
-    get().loadCart();
+    set((state) => {
+      const products = state.products.map((p) =>
+        p.id === product.id ? { ...p, quantity: p.quantity - 1 } : p,
+      );
+      const totalPrice = state.totalPrice - product.price;
+      saveCart(products, totalPrice);
+      return { products, totalPrice };
+    });
   },
 
   removeFromCart: (product: Product) => {
-    removeFromCartLS(product);
-    get().loadCart();
+    set((state) => {
+      const products = state.products.filter((p) => p.id !== product.id);
+      const totalPrice = state.totalPrice - product.price * product.quantity;
+      saveCart(products, totalPrice);
+      return { products, totalPrice };
+    });
   },
+
+  clearCart: () => {
+    clearCartLS();
+    set({ products: [], totalPrice: 0 });
+  },
+
   getProductQuantity: (productId: number) => {
     const item = get().products.find((p) => p.id === productId);
     return item ? item.quantity : 0;
