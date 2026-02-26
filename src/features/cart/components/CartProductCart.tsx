@@ -27,6 +27,7 @@ export default function CartProductCard({
   const quantity = useCartStore(
     (state) => state.products.find((p) => p.id === id)?.quantity ?? 0,
   );
+
   return (
     <Card className="group flex flex-col h-full hover:shadow-md transition-shadow duration-200">
       <CardHeader className="p-4 bg-gray-50 h-48 flex items-center justify-center">

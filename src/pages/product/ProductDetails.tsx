@@ -1,15 +1,40 @@
 import { useNavigate, useParams } from "react-router";
-import { ArrowLeft, ShoppingCart } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetProduct } from "@/features/display/hooks/services/useGetProduc";
 import WithLoadingAndError from "@/components/HOCs/WithLoadingAndError";
+import { useCartStore } from "@/store/cart";
+import type { Product } from "@/@types/Product";
+import { toast } from "sonner";
+import UpdateQuantityBtn from "@/components/common/UpdateQantityBtn";
+import AddToCartBtn from "@/features/display/components/product/AddToCartBtn";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: product, isLoading, isError } = useGetProduct(id);
+  const exists = useCartStore((state) =>
+    state.products.some((p) => p.id === Number(id)),
+  );
+  const quantity = useCartStore(
+    (state) => state.products.find((p) => p.id === Number(id))?.quantity ?? 0,
+  );
+  const { incrementQuantity, decrementQuantity, addToCart } = useCartStore();
+  const handleAddClick = (product: Product) => {
+    addToCart(product);
+    toast.success("Added to cart successfully");
+  };
+
+  const handleIncrement = (product: Product) => {
+    incrementQuantity(product);
+    toast.success("One more item added");
+  };
+  const handleDecrement = (product: Product) => {
+    decrementQuantity(product);
+    toast.success("One item added deleted");
+  };
 
   return (
     <WithLoadingAndError isError={isError} isLoading={isLoading}>
@@ -45,10 +70,15 @@ export default function ProductDetails() {
 
             <p className="text-lg font-bold ">${product?.price.toFixed(2)}</p>
 
-            <Button className="mt-4 gap-2 w-fit">
-              <ShoppingCart className="h-4 w-4" />
-              Add to Cart
-            </Button>
+            {exists ? (
+              <UpdateQuantityBtn
+                value={quantity}
+                incrementAction={() => handleIncrement(product)}
+                decrementAction={() => handleDecrement(product)}
+              />
+            ) : (
+              <AddToCartBtn action={() => handleAddClick(product)} />
+            )}
           </CardContent>
         </Card>
       </div>

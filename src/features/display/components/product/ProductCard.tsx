@@ -11,6 +11,7 @@ import type { Product } from "@/@types/Product";
 import { useCartStore } from "@/store/cart";
 import AddToCartBtn from "./AddToCartBtn";
 import UpdateQantityBtn from "../../../../components/common/UpdateQantityBtn";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;
@@ -31,6 +32,16 @@ export default function ProductCard({
   );
   const handleAddClick = (product: Product) => {
     addToCart(product);
+    toast.success("Added to cart successfully");
+  };
+
+  const handleIncrement = (product: Product) => {
+    incrementQuantity(product);
+    toast.success("One more item added");
+  };
+  const handleDecrement = (product: Product) => {
+    decrementQuantity(product);
+    toast.success("One item added deleted");
   };
 
   return (
@@ -68,8 +79,8 @@ export default function ProductCard({
         {exists ? (
           <UpdateQantityBtn
             value={quantity}
-            incrementAction={() => incrementQuantity(product)}
-            decrementAction={() => decrementQuantity(product)}
+            incrementAction={() => handleIncrement(product)}
+            decrementAction={() => handleDecrement(product)}
           />
         ) : (
           <AddToCartBtn action={() => handleAddClick(product)} />
