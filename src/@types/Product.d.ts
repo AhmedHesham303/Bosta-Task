@@ -11,5 +11,5 @@ export interface Product {
   category: string;
   image: string;
   rating?: ProductRating;
-  quantity?: number;
+  quantity: number;
 }

@@ -47,6 +47,7 @@ export default function CreateProductForm() {
               description: values.description,
               category: values.category,
               image: values.image,
+              quantity: 1,
             },
             {
               onSuccess: () => {

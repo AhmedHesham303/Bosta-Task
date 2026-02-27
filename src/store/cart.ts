@@ -33,7 +33,7 @@ export const useCartStore = create<CartStore>((set) => ({
   incrementQuantity: (product: Product) => {
     set((state) => {
       const products = state.products.map((p) =>
-        p.id === product.id ? { ...p, quantity: p.quantity || 1 + 1 } : p,
+        p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p,
       );
       const totalPrice = state.totalPrice + product.price;
       saveCart(products, totalPrice);
@@ -44,7 +44,7 @@ export const useCartStore = create<CartStore>((set) => ({
   decrementQuantity: (product: Product) => {
     set((state) => {
       const products = state.products.map((p) =>
-        p.id === product.id ? { ...p, quantity: p.quantity || -1 } : p,
+        p.id === product.id ? { ...p, quantity: p.quantity - 1 } : p,
       );
       const totalPrice = state.totalPrice - product.price;
       saveCart(products, totalPrice);
